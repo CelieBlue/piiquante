@@ -17,10 +17,11 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password: hash
         });
+        console.log(email, password);
  
         user.save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
-        .catch(error => res.status(400).json({ error }));
+        .catch(error => res.status(400).json({ error : "erreur lors de l'enregistrement d'une utilisateur"}));
     })
     .catch(error => res.status(500).json({ error }));
 };

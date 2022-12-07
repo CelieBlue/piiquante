@@ -1,11 +1,17 @@
 //Express importation
 const express = require('express');
 
+//CORS Importation
+const cors = require('cors');
+
 //Morgan importation
 const morgan = require('morgan');
 
 //Mongoose importation
 const mongoose = require('./db/db');
+
+//Images: Path importation to acceed to the path of the server
+const path = require('path');
 
 //User router importation
 const userRoutes = require('./routes/user');
@@ -16,12 +22,12 @@ const sauceRoutes = require('./routes/sauce');
 //Create a express application
 const app = express();
 
-//Path importation to acceed to the path of the server
-const path = require('path');
-
 
 //To read the request sent in the body
 app.use(express.json());
+
+//Enable all CORS requests
+app.use(cors());
 
 //Log the req and res
 app.use(morgan('dev'));
@@ -37,12 +43,6 @@ app.use((req, res, next) => {
   });
 
 //========================================
-
-// Result of the request to the server
-app.use((req, res, next) => {
-    res.json({message : 'Votre requête a bien été reçue'});
-    next();
-});
 
 //Call the Routes of API with authorization
 app.use('/images', express.static(path.join(__dirname, 'images')));

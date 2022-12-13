@@ -17,7 +17,6 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password: hash
         });
-        console.log(email, password);
  
         user.save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
@@ -36,7 +35,7 @@ exports.login = (req, res, next) => {
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {
-                        return res.status(401).json({ error: 'Identifiant ou mot de passe invalide' });
+                        return res.status(401).json({ message: 'Identifiant ou mot de passe invalide' });
                     }
                     res.status(200).json({
                         userId: user._id,
@@ -48,8 +47,8 @@ exports.login = (req, res, next) => {
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
-                console.log("Token non trouvé");
+                console.log("Token trouvé");
         })
         .catch(error => res.status(500).json({ error }));
-        console.log('Utilisateur non trouvé');
+        console.log('Utilisateur trouvé');
  };

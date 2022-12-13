@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 //User's model importation
-const User = require('../models/user');
+const User = require('../models/User');
 
 //Signup function: Create a new User saved in the db with a hash
 exports.signup = (req, res, next) => {
@@ -18,9 +18,11 @@ exports.signup = (req, res, next) => {
             password: hash
         });
  
-        user.save()
+        user
+        .save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
-        .catch(error => res.status(400).json({ error : "erreur lors de l'enregistrement d'une utilisateur"}));
+        .catch(error => res.status(400).json({ error }));
+        console.log("controller/user, signup : erreur lors de l'enregistrement d'une utilisateur");
     })
     .catch(error => res.status(500).json({ error }));
 };
@@ -47,8 +49,8 @@ exports.login = (req, res, next) => {
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
-                console.log("Token trouvé");
+                console.log("controllers/user : Mot de passe invalide");
         })
         .catch(error => res.status(500).json({ error }));
-        console.log('Utilisateur trouvé');
+        console.log('controllers/user : Utilisateur non trouvé');
  };

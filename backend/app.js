@@ -22,7 +22,6 @@ const sauceRoutes = require('./routes/sauce');
 //Create a express application
 const app = express();
 
-
 //To read the request sent in the body
 app.use(express.json());
 

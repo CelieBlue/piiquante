@@ -19,7 +19,7 @@ console.log(sauceCtrl);
 //endpoints for Sauces
 router.post('/', auth, multer, sauceCtrl.createSauce);
 router.get('/:id', auth, sauceCtrl.getOneSauce);
-router.get('/', auth, sauceCtrl.getAllSauces);
+router.get('/', auth, sauceCtrl.getAllSauce);
 router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 router.delete('/:id', auth, sauceCtrl.deleteSauce);
 

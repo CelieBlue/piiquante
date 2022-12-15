@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 //bcrypt importation to crypt the password
 const bcrypt = require('bcrypt');
 
@@ -18,13 +21,12 @@ exports.signup = (req, res, next) => {
             password: hash
         });
  
-        user
-        .save()
+        user.save()
         .then(() => res.status(201).json({ message: "Utilisateur créé !"}))
         .catch(error => res.status(400).json({ error }));
-        console.log("controller/user, signup : erreur lors de l'enregistrement d'une utilisateur");
     })
     .catch(error => res.status(500).json({ error }));
+    console.log("Utilisateur créé");
 };
 
 //Login function: compare the request password with the database password
@@ -43,14 +45,14 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             {userId: user._id},
-                            'RANDOM_TOKEN_SECRET',
-                            {expiresIn: '24'}
+                            `${process.env.RANDOM_TOKEN_SECRET}`,
+                            {expiresIn: '24h'}
                         )
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
-                console.log("controllers/user : Mot de passe invalide");
+                console.log("Connexion réussie");
         })
         .catch(error => res.status(500).json({ error }));
-        console.log('controllers/user : Utilisateur non trouvé');
+        console.log("Utilisateur identifié");
  };

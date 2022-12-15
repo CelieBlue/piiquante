@@ -1,7 +1,7 @@
 //Express importation
 const express = require('express');
 
-//CORS Importation
+//Cors importation
 const cors = require('cors');
 
 //Morgan importation
@@ -25,7 +25,7 @@ const app = express();
 //To read the request sent in the body
 app.use(express.json());
 
-//Enable all CORS requests
+// Enable all CORS requests
 app.use(cors());
 
 //Log the req and res

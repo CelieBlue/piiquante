@@ -27,6 +27,7 @@ app.use(express.json());
 
 // Enable all CORS requests
 app.use(cors());
+app.options('*', cors());
 
 //Log the req and res
 app.use(morgan('dev'));

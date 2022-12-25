@@ -34,7 +34,7 @@ exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
             if (!user) {
-                return res.status(401).json({ message: "Ce compte n'existe pas"});
+                return res.status(401).json({ message: "Paire Identifiant/mot de passe invalide"});
             }
             bcrypt.compare(req.body.password, user.password)
                 .then(valid => {

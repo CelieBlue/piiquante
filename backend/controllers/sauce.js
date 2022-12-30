@@ -26,7 +26,6 @@ exports.createSauce = (req, res, next) => {
         })
 };
 
-
 //Read sauces ==========================================
 //All sauces
 exports.getAllSauce = (req, res, next) => {

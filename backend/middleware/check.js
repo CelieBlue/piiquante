@@ -9,33 +9,21 @@ const { check, validationResult } = require('express-validator');
 exports.validateUserSignUp = [
     check('email')
         .isEmail()
-        .withMessage({
-            message :'Email Invalide !',
-            errorCode: 1,})
+        .withMessage('Email Invalide !')
         .normalizeEmail(),
     check('password', 'Le mot de passe doit contenir au moins 8 caractères, 1 caractère spécial et 1 chiffre, 1 minusccule et une majuscule')
         .trim()
         .not()
         .isEmpty()
-        .withMessage({
-            message : 'Entrez un mot de passe',
-            errorCode: 2,})
+        .withMessage('Entrez un mot de passe')
         .isLength({min: 8, max: 30})
-        .withMessage({
-            message : 'Le mot de passe doit contenir 8 à 30 caractères !',
-            errorCode: 3,})
+        .withMessage('Le mot de passe doit contenir 8 à 30 caractères !')
         .matches(/\d/)
-        .withMessage({
-            message : 'Le mot de passe doit contenir au moins un nombre',
-            errorCode: 4,})
+        .withMessage('Le mot de passe doit contenir au moins un nombre')
         .matches(/[!@#$%^&*(),.?":{}|<>]/)
-        .withMessage({
-            message : 'Le mot de passe doit contenir au moins un caractère spécial',
-            errorCode: 5,})
+        .withMessage('Le mot de passe doit contenir au moins un caractère spécial')
         .matches(/[A-Z]/)
-        .withMessage({
-            message :'Le mot de passe doit contenir au moins une Majuscule et une minuscule',
-            errorCode: 6}),
+        .withMessage('Le mot de passe doit contenir au moins une Majuscule et une minuscule')
 ];
    
 exports.userValidation = (req, res, next) => {
@@ -44,5 +32,5 @@ exports.userValidation = (req, res, next) => {
 
     const error = result[0].msg;
     console.log(error);
-    res.json({success: false, message: error});
+    res.status(401).json({success: false, message: error});
 };

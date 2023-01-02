@@ -37,6 +37,7 @@ app.use(morgan('dev'));
 
 //Secure the express app by setting various HTTP Headers
 app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 //========================================
 
